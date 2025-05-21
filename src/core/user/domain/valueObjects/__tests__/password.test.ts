@@ -1,8 +1,8 @@
-import Password from './password';
+import { Password } from '../password';
 
 describe('Password', () => {
   it('should throw an error if password is empty', () => {
-    expect(() => new Password('')).toThrow('Text is required');
+    expect(() => new Password('')).toThrow('Password is required');
   });
 
   it('should throw an error if password does not meet criteria', () => {
@@ -16,5 +16,12 @@ describe('Password', () => {
     const password2 = new Password('Qwerty1234');
 
     expect(password1.equal(password2)).toBe(true);
+  });
+
+  it('should return false for different passwords', () => {
+    const password1 = new Password('Qwerty1234');
+    const password2 = new Password('Qwerty5678');
+
+    expect(password1.equal(password2)).toBe(false);
   });
 });

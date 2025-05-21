@@ -1,4 +1,4 @@
-import Email from './email';
+import { Email } from '../email';
 
 describe('Email', () => {
   it('should throw an error if email is empty', () => {
@@ -13,6 +13,18 @@ describe('Email', () => {
     const email1 = new Email('username@domain.com');
     const email2 = new Email('username@domain.com');
 
-    expect(email1.equal(email2)).toBe(true);
+    expect(email1.equals(email2)).toBe(true);
+  });
+
+  it('should return false for different emails', () => {
+    const email1 = new Email('a@domain.com');
+    const email2 = new Email('b@domain.com');
+
+    expect(email1.equals(email2)).toBe(false);
+  });
+
+  it('should return the raw email value', () => {
+    const email = new Email('a@domain.com');
+    expect(email.getValue()).toBe('a@domain.com');
   });
 });

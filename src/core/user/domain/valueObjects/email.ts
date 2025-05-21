@@ -1,9 +1,5 @@
-interface Email {
-  value: string;
-}
-
-export default class EmailEntity implements Email {
-  value: string;
+export class Email {
+  private readonly value: string;
 
   private static readonly EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -12,14 +8,18 @@ export default class EmailEntity implements Email {
       throw new Error('Email is required');
     }
 
-    if (!EmailEntity.EMAIL_REGEX.test(value)) {
+    if (!Email.EMAIL_REGEX.test(value)) {
       throw new Error('Email is not valid');
     }
 
     this.value = value;
   }
 
-  equal(other: Email): boolean {
-    return this.value === other.value;
+  getValue(): string {
+    return this.value;
+  }
+
+  equals(other: Email): boolean {
+    return this.value === other.getValue();
   }
 }
